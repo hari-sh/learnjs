@@ -19,8 +19,21 @@ c2.draw(); //draw circle with radius:2
 
 function createCircle(radius){
     return{
-        radius,
+        radius : radius,
         draw: function()    {
+            console.log('draw circle with radius:' + this.radius)
+        }
+    }
+}
+
+//or simply
+//in modern js if param and property are same we can use single name
+//if funs are inside object simply declare without function keyword
+//came notation
+function createCircle1(radius){
+    return{
+        radius,
+        draw(){
             console.log('draw circle with radius:' + this.radius)
         }
     }
@@ -30,6 +43,8 @@ const c3 = createCircle(3)
 c3.draw(); //draw circle with radius:3
 
 //use a constructor function
+//PascalNotation
+//no return statement
 function Circle(radius){   //capital letter in beginning -> convention
     this.radius = radius;
     this.draw = function(){
@@ -64,7 +79,7 @@ new Boolean()
 /*functions are objects*/
 
 console.log(Circle.name)
-console.log(Circle.length)
+console.log(Circle.length) //number of arguments
 console.log(Circle.constructor)
 
 const Circle1 = new Function('radius', `this.radius = radius;
@@ -209,3 +224,48 @@ const c9 = new Circle3(9)
 c9.defaultLocation = {x:1, y:1}
 //{x:0, x:1} throws errors 0 seems to be false in js /*verify*/
 console.log(c9.defaultLocation);
+
+const c10 = {};
+for(let key in c1){
+    c10[key] = c1[key];
+}
+console.log('Copy Obj old');
+console.log(c1);
+console.log(c10);
+
+console.log(Object.assign({}, c1)) //same as c1
+console.log({...c1}) //same as above elegent way
+//keeping ...c1 will do copy. if we keep c1. c1 itself will become a property
+// ... -> spread operator
+
+console.log(Object.assign({color:'red'}, c1, c2)) 
+console.log({color:'red', ...c1, ...c2}); //elegent way of copy same as above
+//c2 and c1 has radius. it is overwritten by c2
+
+
+//garbage collection
+//as a dev, dont have much control. it will happen by itself
+/*check more on this*/
+
+//checkout js Math Object
+//checkout js String Object
+
+//js has string primitive and string object
+
+console.log(typeof('hi')); //string
+console.log(typeof(new String('hi'))); //object
+
+const strprim = 'hi'
+strprim.toUpperCase() 
+//when we do dot on string primitive js wraps it around string object
+
+//template literal -> ``
+/*
+to use string exactly the way it looks
+to add place holder using ${variable/expression}
+*/
+
+console.count(`${strprim} -> ${2+5}`);
+
+
+
