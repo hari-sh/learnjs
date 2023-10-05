@@ -1,12 +1,3 @@
-function alreadyDeclared()
-{
-//before es6
-    var name;
-
-//after es6 => best practice is let
-    // let name; // err: name has already been declared
-}
-
 function varname()
 {
     let name;
