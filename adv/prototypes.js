@@ -28,4 +28,56 @@ Object.defineProperty(person, 'name', {writable:false});
 person.name = 'rana';
 console.log(person.name) //still hari
 
-console.log()
+console.log({}.__proto__);
+console.log(Object.prototype); //both are same
+
+console.log([].__proto__);
+console.log(Array.prototype); //both are same
+
+
+function Circ(radius){
+    this.radius = radius;
+    //instance members (own members)
+    this.draw = function()  {
+        console.log('draw');
+    }
+}
+
+console.log(new Circ(1));
+console.log(new Circ(2));//draw takes two memory
+
+function Circ1(radius){
+    this.radius = radius;
+    this.move = function(){
+        //we can use this.draw() here
+        console.log('move');
+    }
+}
+
+const circ1 = new Circ1(5);
+//circ1.draw() wont be available
+//prototype members
+Circ1.prototype.draw = function()  {
+    //we can use this.move() here
+    console.log('draw');
+}
+circ1.draw(); //it will be available here
+
+console.log(new Circ1(1));
+
+Circ1.prototype.toString = function()  {
+    console.log('Circle with radius ' + this.radius);
+}
+//nearby accessible function will be called if two names are string
+
+console.log(Object.keys(circ1)); //returns instant members only
+for(let key in circ1) console.log(key); //returns both instant and prototype members
+
+console.log(circ1.hasOwnProperty('move'))//true
+console.log(circ1.hasOwnProperty('draw'))//false
+
+//built in objects modification can be made. but dont do
+
+
+
+
